@@ -24,6 +24,7 @@ fun CoinListScreen(
     viewModel: CoinListViewModel = hiltViewModel() // hiltViewModel will find the CoinListViewModel automatically
 ) {
     val state = viewModel.state.value
+
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.coins) { coin ->
