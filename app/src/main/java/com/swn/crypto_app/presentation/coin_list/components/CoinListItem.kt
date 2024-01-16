@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.swn.crypto_app.domain.model.Coin
+import com.swn.crypto_app.presentation.theme.Green80
 
 @Composable
 fun CoinListItem(
@@ -33,18 +34,16 @@ fun CoinListItem(
     ) {
         Text(
             text = "${coin.rank}. ${coin.name} (${coin.symbol})",
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyLarge,
             overflow = TextOverflow.Ellipsis
         )
         Text(
             text = if (coin.isActive) "active" else "inactive",
-            color = if (coin.isActive) Color.Green else Color.Red,
+            color = if (coin.isActive) Green80 else Color.Red,
             fontStyle = FontStyle.Italic,
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.align(Alignment.CenterVertically)
-
         )
-
     }
 }

@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.swn.crypto_app.data.remote.dto.TeamMember
 
@@ -23,7 +24,8 @@ fun TeamListItem(
     ) {
         Text(
             text = teamMember.name,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight(500),
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(

@@ -1,7 +1,9 @@
 package com.swn.crypto_app.presentation.coin_list
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -24,9 +26,11 @@ fun CoinListScreen(
     viewModel: CoinListViewModel = hiltViewModel() // hiltViewModel will find the CoinListViewModel automatically
 ) {
     val state = viewModel.state.value
-
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
+            item {
+                Spacer(modifier = Modifier.height(7.dp))
+            }
             items(state.coins) { coin ->
                 CoinListItem(coin = coin, onItemClick = {
                     navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
