@@ -1,8 +1,8 @@
 package com.swn.crypto_app.domain.use_case.get_coin
-import com.swn.crypto_app.common.Resource
-import com.swn.crypto_app.data.remote.dto.toCoin
+
+import com.swn.crypto_app.common.MsgState
+import com.swn.crypto_app.common.Resp
 import com.swn.crypto_app.data.remote.dto.toCoinDetail
-import com.swn.crypto_app.domain.model.Coin
 import com.swn.crypto_app.domain.model.CoinDetail
 import com.swn.crypto_app.domain.repository.CoinRepository
 import kotlinx.coroutines.flow.Flow
@@ -14,15 +14,20 @@ import javax.inject.Inject
 class GetCoinUseCase @Inject constructor(
     private val repository: CoinRepository
 ) {
-    operator fun invoke(coinId: String): Flow<Resource<CoinDetail>> = flow {
+    operator fun invoke(coinId: String): Flow<Resp<CoinDetail>> = flow {
         try {
-            emit(Resource.Loading())
+            emit(Resp(state = MsgState.Loading))
             val coin = repository.getCoinById(coinId).toCoinDetail()
-            emit(Resource.Success(coin))
+            emit(Resp(data = coin, state = MsgState.Data))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(Resp(data = "An unexpected error occurred", state = MsgState.Error))
         } catch (e: IOException) {
-            emit(Resource.Error("No internet, check your internet connection"))
+            emit(
+                Resp(
+                    data = "No internet, check your internet connection",
+                    state = MsgState.Error
+                )
+            )
         }
     }
 }

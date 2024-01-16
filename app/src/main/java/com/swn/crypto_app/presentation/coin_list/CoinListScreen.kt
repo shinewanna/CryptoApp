@@ -1,22 +1,16 @@
 package com.swn.crypto_app.presentation.coin_list
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.swn.crypto_app.common.Output
 import com.swn.crypto_app.presentation.Screen
 import com.swn.crypto_app.presentation.coin_list.components.CoinListItem
 
@@ -25,31 +19,20 @@ fun CoinListScreen(
     navController: NavController,
     viewModel: CoinListViewModel = hiltViewModel() // hiltViewModel will find the CoinListViewModel automatically
 ) {
-    val state = viewModel.state.value
-    Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            item {
-                Spacer(modifier = Modifier.height(7.dp))
+    val resp = viewModel.resp.value
+    Output(
+        resp = resp,
+        onData = { data ->
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                item {
+                    Spacer(modifier = Modifier.height(7.dp))
+                }
+                items(data) { coin ->
+                    CoinListItem(coin = coin, onItemClick = {
+                        navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
+                    })
+                }
             }
-            items(state.coins) { coin ->
-                CoinListItem(coin = coin, onItemClick = {
-                    navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
-                })
-            }
-        }
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error, color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp)
-                    .align(Alignment.Center)
-            )
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-
-    }
+        },
+    )
 }

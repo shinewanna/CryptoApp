@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,6 +25,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.swn.crypto_app.common.Output
 import com.swn.crypto_app.presentation.coin_detail.components.CoinTag
 import com.swn.crypto_app.presentation.coin_detail.components.TeamListItem
 import com.swn.crypto_app.presentation.theme.Green80
@@ -35,13 +35,13 @@ import com.swn.crypto_app.presentation.theme.Green80
 fun CoinDetailScreen(
     viewModel: CoinDetailViewModel = hiltViewModel() // hiltViewModel will find the CoinListViewModel automatically from di
 ) {
-    val state = viewModel.state.value
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 15.dp)
-    ) {
-        state.coin?.let { coin ->
+    val resp = viewModel.resp.value
+    Output(resp = resp, onData = { coin ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 15.dp)
+        ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -109,7 +109,6 @@ fun CoinDetailScreen(
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                     }
-
                 }
                 items(coin.team) { teamMember ->
                     TeamListItem(
@@ -120,22 +119,7 @@ fun CoinDetailScreen(
                     )
                     Divider()
                 }
-
             }
         }
-        if (state.error.isNotBlank()) {
-            Text(
-                text = state.error, color = MaterialTheme.colorScheme.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp)
-                    .align(Alignment.Center)
-            )
-        }
-        if (state.isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-        }
-
-    }
+    })
 }
