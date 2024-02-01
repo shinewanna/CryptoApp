@@ -25,7 +25,7 @@ Repository defines the contract between the data layer and domain layer. Create 
 Usecase represents the business logic of the applications.
 They depend on the repository and call its methods to perform data operate.
 
-## Presentation
+## Presentation Layer
 ### ViewModel
 ViewModel manages the state of the UI and business logic. It depends on usecases to execute business operations.
 ViewModel emits states to the UI, decoupling it from business logic.
