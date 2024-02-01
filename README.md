@@ -34,7 +34,7 @@ ViewModel emits states to the UI, decoupling it from business logic.
 Screens are responsible for displaying UI components and listening to ViewModel states.
 They react to state changes and update the UI accordingly.
 
-## Common
+# Common
 Common has cores and extensions.
 For example.
 Constants,
