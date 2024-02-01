@@ -11,7 +11,7 @@ Remotes has dto(Data Transfer Object) and API interface. Dto is used to convert 
 They implement the repository interface defined in the domain layer.
 
 ### Repository
-Repository havs the implementation of the repository contract defined in the domain layer. They interact with data sources to retrieve data.
+Repository has the implementation of the repository contract defined in the domain layer. They interact with data sources to retrieve data.
 Repository implementations allow switching data sources without modifying the domain layer.
 
 ## Domain Layer
@@ -33,6 +33,13 @@ ViewModel emits states to the UI, decoupling it from business logic.
 ### Screen
 Screens are responsible for displaying UI components and listening to ViewModel states.
 They react to state changes and update the UI accordingly.
+
+# Common
+Common has cores and extensions.
+For example.
+Constants,
+Resp(Resp is used as an data observer to the business logic, will have data reponse and state(Loading, Data, Error)),
+Output(Output is used as an UI observer to transform the UI according to ViewModel respond. It will handle most duplicated UI properties such as showing loading and error messages).
 
 # Dependency Injection
 Dependency injection is used to provide dependencies to different layer of the app.
