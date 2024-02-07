@@ -46,6 +46,15 @@ Dependency injection is used to provide dependencies to different layer of the a
 It help in managing the dependencies and allows easy swapping of implementations. 
 For example. Dagger-Hilt can be used for dependency injection.
 
+# Screenshots
+## Dark Mode
 Home Screen               |  Detail Screen               
 :-------------------------:|:-------------------------:
 <img src="https://github.com/shinewanna/BackgroundSmsPlugin/assets/39454969/92dbf485-230f-4123-aa9f-8d588d227da5" width="200" height="400"/>|<img src="https://github.com/shinewanna/BackgroundSmsPlugin/assets/39454969/471417c9-7958-472a-94ac-cab9801dcd6a" width="200" height="400"/>|
+
+## Light Mode
+Home Screen               |  Detail Screen               
+:-------------------------:|:-------------------------:
+<img src="https://github.com/shinewanna/BackgroundSmsPlugin/assets/39454969/d7df572e-be79-4910-8f9e-16ca875ac9e7" width="200" height="400"/>|<img src="https://github.com/shinewanna/BackgroundSmsPlugin/assets/39454969/eae87221-dd53-4415-9a77-d4e6006e61ab" width="200" height="400"/>|
+
+
